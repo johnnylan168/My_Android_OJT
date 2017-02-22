@@ -23,33 +23,38 @@
         android:layout_height="wrap_content"
         android:id="@+id/main_list_varible"
         android:text="HW2.產品列表(變數版)"
-        android:onClick="itemClick" />
+        android:onClick="itemClick"
+        android:visibility="invisible"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/main_list_database"
         android:text="HW3.產品列表(資料庫版)"
-        android:onClick="itemClick" />
+        android:onClick="itemClick"
+        android:visibility="invisible"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/main_contact_list"
         android:text="HW4.聯絡人清單"
-        android:onClick="itemClick" />
+        android:onClick="itemClick"
+        android:visibility="invisible"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/main_calender"
         android:text="HW5.行事曆提醒"
-        android:onClick="itemClick" />
+        android:onClick="itemClick"
+        android:visibility="invisible"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/main_pic_downloader"
         android:text="HW6.圖片下載器"
-        android:onClick="itemClick" />
+        android:onClick="itemClick"
+        android:visibility="invisible"/>
 </LinearLayout>

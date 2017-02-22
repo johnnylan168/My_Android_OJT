@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_calculator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="com.example.rd26.my_android_ojt.CalculatorActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/lightGrey"
+            android:id="@+id/calculator_result"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical|right"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:maxLength="10"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="horizontal">
+
+        <TableLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="3"
+            android:shrinkColumns="*"
+            >
+
+            <TableRow>
+                <Button
+                    android:text="1"
+                    android:onClick="numberClick"
+                    android:id="@+id/calculator_num_one"/>
+                <Button
+                    android:text="2"
+                    android:onClick="numberClick"
+                    android:id="@+id/calculator_num_two"/>
+                <Button
+                    android:text="3"
+                    android:onClick="numberClick"
+                    android:id="@+id/calculator_num_three"/>
+            </TableRow>
+
+            <TableRow>
+                <Button
+                    android:text="4"
+                    android:onClick="numberClick"
+                    android:id="@+id/calculator_num_four"/>
+                <Button
+                    android:text="5"
+                    android:onClick="numberClick"
+                    android:id="@+id/calculator_num_five"/>
+                <Button
+                    android:text="6"
+                    android:onClick="numberClick"
+                    android:id="@+id/calculator_num_six"/>
+            </TableRow>
+
+            <TableRow>
+                <Button
+                    android:text="7"
+                    android:onClick="numberClick"
+                    android:id="@+id/calculator_num_seven"/>
+                <Button
+                    android:text="8"
+                    android:onClick="numberClick"
+                    android:id="@+id/calculator_num_eight"/>
+                <Button
+                    android:text="9"
+                    android:onClick="numberClick"
+                    android:id="@+id/calculator_num_nine"/>
+            </TableRow>
+
+            <TableRow>
+                <Button
+                    android:text="C"
+                    android:onClick="numberClear"/>
+                <Button
+                    android:text="0"
+                    android:onClick="numberClick"
+                    android:id="@+id/calculator_num_zero"/>
+                <Button
+                    android:text="="
+                    android:onClick="numberResult"/>
+            </TableRow>
+
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:shrinkColumns="*">
+
+            <TableRow>
+                <Button
+                    android:text="+"
+                    android:id="@+id/calculator_add"/>
+            </TableRow>
+            <TableRow>
+                <Button
+                    android:text="-"
+                    android:id="@+id/calculator_sub"/>
+            </TableRow>
+            <TableRow>
+                <Button
+                    android:text="*"
+                    android:id="@+id/calculator_mul"/>
+            </TableRow>
+            <TableRow>
+                <Button
+                    android:text="/"
+                    android:id="@+id/calculator_div"/>
+            </TableRow>
+
+        </TableLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
