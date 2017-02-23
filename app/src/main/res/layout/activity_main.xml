@@ -23,8 +23,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/main_list_varible"
         android:text="HW2.產品列表(變數版)"
-        android:onClick="itemClick"
-        android:visibility="invisible"/>
+        android:onClick="itemClick"/>
 
     <Button
         android:layout_width="match_parent"

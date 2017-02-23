@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.main_list_varible:
+                intent = new Intent(MainActivity.this, ListViaVariableActivity.class);
+                startActivity(intent);
                 break;
             case R.id.main_list_database:
                 break;
