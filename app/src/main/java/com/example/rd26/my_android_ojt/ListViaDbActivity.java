@@ -9,6 +9,10 @@ import android.os.Handler;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.ActionMenuView;
+import android.support.v7.widget.PopupMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -136,15 +140,38 @@ public class ListViaDbActivity extends AppCompatActivity {
         sqLiteDatabase.close();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.list_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case R.id.menu_add_data:
+                Cursor menuCursor = sqLiteDatabase.query("b_data", null, null, null, null, null, null);
+                if (menuCursor.getCount() == 0) {
+                    insertData();
+                }else {
+                    Toast.makeText(ListViaDbActivity.this, "已有資料，如無顯示，請重新開啟App", Toast.LENGTH_SHORT).show();
+                }
+                menuCursor.close();
+                break;
+        }
+        return true;
+    }
+
     /////////////////////////////////////////////////////////////////////////////////////////
-//    private void insertData() {
-//        ContentValues contentValues = new ContentValues();
-//        for(int i = 0; i<55 ;i++) {
-//            contentValues.put("title", "第" + (i+1) + "項");
-//            contentValues.put("content", "第" + (i+1) + "項產品一向都是國人最愛，如果你也愛，請購買本產品，" +
-//                    "它將帶給你無比的快樂及滿足。功能多樣化，讓你愛不釋手，還有99段變速和超乎人腦智慧的功能");
-//            sqLiteDatabase.insert("b_data", null, contentValues);
-//        }
-//        sqLiteDatabase.close();
-//    }
+    private void insertData() {
+        ContentValues contentValues = new ContentValues();
+        for(int i = 0; i<55 ;i++) {
+            contentValues.put("title", "第" + (i+1) + "項");
+            contentValues.put("content", "第" + (i+1) + "項產品一向都是國人最愛，如果你也愛，請購買本產品，" +
+                    "它將帶給你無比的快樂及滿足。功能多樣化，讓你愛不釋手，還有99段變速和超乎人腦智慧的功能");
+            sqLiteDatabase.insert("b_data", null, contentValues);
+        }
+    }
 }
