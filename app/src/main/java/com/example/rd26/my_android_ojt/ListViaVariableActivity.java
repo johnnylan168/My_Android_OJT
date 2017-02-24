@@ -30,7 +30,7 @@ public class ListViaVariableActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_via_variable);
+        setContentView(R.layout.activity_data_list);
 
         processView();
         processController();
@@ -39,7 +39,7 @@ public class ListViaVariableActivity extends AppCompatActivity {
 
     // findViewById
     private void processView() {
-        listView = (ListView) findViewById(R.id.listview_via_varable);
+        listView = (ListView) findViewById(R.id.data_listview);
     }
 
     // 處理監聽事件和資料

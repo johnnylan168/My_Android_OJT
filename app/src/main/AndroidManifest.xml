@@ -17,7 +17,8 @@
         </activity>
         <activity android:name=".CalculatorActivity" />
         <activity android:name=".ListViaVariableActivity" />
-        <activity android:name=".ListItemDetailActivity"></activity>
+        <activity android:name=".ListItemDetailActivity" />
+        <activity android:name=".ListViaDbActivity"></activity>
     </application>
 
 </manifest>

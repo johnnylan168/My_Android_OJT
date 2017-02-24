@@ -30,8 +30,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/main_list_database"
         android:text="HW3.產品列表(資料庫版)"
-        android:onClick="itemClick"
-        android:visibility="invisible"/>
+        android:onClick="itemClick"/>
 
     <Button
         android:layout_width="match_parent"

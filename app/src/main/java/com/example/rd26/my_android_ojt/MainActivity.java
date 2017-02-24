@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.main_list_database:
+                intent = new Intent(MainActivity.this, ListViaDbActivity.class);
+                startActivity(intent);
                 break;
             case R.id.main_contact_list:
                 break;
