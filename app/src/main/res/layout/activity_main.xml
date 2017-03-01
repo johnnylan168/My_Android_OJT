@@ -37,8 +37,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/main_contact_list"
         android:text="HW4.聯絡人清單"
-        android:onClick="itemClick"
-        android:visibility="invisible"/>
+        android:onClick="itemClick" />
 
     <Button
         android:layout_width="match_parent"

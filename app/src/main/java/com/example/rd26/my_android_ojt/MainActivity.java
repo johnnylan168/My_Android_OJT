@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.main_contact_list:
+                intent = new Intent(MainActivity.this, ContactActivity.class);
+                startActivity(intent);
                 break;
             case R.id.main_calender:
                 break;
