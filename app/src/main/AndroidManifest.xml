@@ -22,7 +22,8 @@
         <activity android:name=".ListViaVariableActivity" />
         <activity android:name=".ListItemDetailActivity" />
         <activity android:name=".ListViaDbActivity" />
-        <activity android:name=".ContactActivity"></activity>
+        <activity android:name=".ContactActivity" />
+        <activity android:name=".CalenderActivity"></activity>
     </application>
 
 </manifest>

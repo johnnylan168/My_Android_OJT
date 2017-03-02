@@ -44,8 +44,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/main_calender"
         android:text="HW5.行事曆提醒"
-        android:onClick="itemClick"
-        android:visibility="invisible"/>
+        android:onClick="itemClick" />
 
     <Button
         android:layout_width="match_parent"

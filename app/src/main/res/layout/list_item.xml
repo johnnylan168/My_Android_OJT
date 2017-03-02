@@ -13,13 +13,32 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:text="項目"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_marginLeft="10dp"
-            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
             android:id="@+id/item_title"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="開賣時間:"
+            android:gravity="center_vertical"
+            android:id="@+id/item_sale_time_title"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="2017/1/1"
+            android:gravity="center_vertical"
+            android:id="@+id/item_sale_time"
+            android:visibility="invisible"
             />
     </LinearLayout>
 

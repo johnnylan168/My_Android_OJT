@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.main_calender:
+                intent = new Intent(MainActivity.this, CalenderActivity.class);
+                startActivity(intent);
                 break;
             case R.id.main_pic_downloader:
                 break;
