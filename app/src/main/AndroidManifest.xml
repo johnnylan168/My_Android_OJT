@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -23,7 +26,8 @@
         <activity android:name=".ListItemDetailActivity" />
         <activity android:name=".ListViaDbActivity" />
         <activity android:name=".ContactActivity" />
-        <activity android:name=".CalenderActivity"></activity>
+        <activity android:name=".CalenderActivity" />
+        <activity android:name=".PicDownloadActivity"></activity>
     </application>
 
 </manifest>

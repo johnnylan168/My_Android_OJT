@@ -51,6 +51,5 @@
         android:layout_height="wrap_content"
         android:id="@+id/main_pic_downloader"
         android:text="HW6.圖片下載器"
-        android:onClick="itemClick"
-        android:visibility="invisible"/>
+        android:onClick="itemClick" />
 </LinearLayout>

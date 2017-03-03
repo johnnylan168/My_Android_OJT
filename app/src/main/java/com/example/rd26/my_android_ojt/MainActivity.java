@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.main_pic_downloader:
+                intent = new Intent(MainActivity.this, PicDownloadActivity.class);
+                startActivity(intent);
                 break;
         }
     }
