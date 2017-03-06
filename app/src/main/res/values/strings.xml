@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">My_Android_OJT</string>
+    <string name="calculator">計算機</string>
+    <string name="listViaVariable">產品列表(從變數)</string>
+    <string name="listViaDb">產品列表(從資料庫)</string>
+    <string name="contact">聯絡人清單</string>
+    <string name="calender">行事曆提醒</string>
+    <string name="picDownload">圖片下載器</string>
+    <string name="listItem">產品明細</string>
 </resources>

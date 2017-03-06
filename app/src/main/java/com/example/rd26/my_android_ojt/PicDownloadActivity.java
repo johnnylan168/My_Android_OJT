@@ -2,6 +2,7 @@ package com.example.rd26.my_android_ojt;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Environment;
@@ -88,17 +89,6 @@ public class PicDownloadActivity extends AppCompatActivity {
         processView();
         processController();
         processAdapter();
-
-        // TODO: 2017/3/3
-        // 1.取得自定義資料夾位置
-        // 2.adapter載入自訂義資料夾裡的圖片
-        // 3.gridview設定adapter
-        // 4.按下下載按鈕
-        // 5.開始下載，網址UI轉為progressBar
-        // 6.載入完畢，存至自訂義資料夾
-        // 7.更新adapter和畫面
-        // 8.點選後開新頁顯示圖片
-        // 9.長按時可刪除圖片，並呼叫adapter更新畫面
     }
 
     // findViewById
@@ -132,16 +122,37 @@ public class PicDownloadActivity extends AppCompatActivity {
         clearUrlBtn.setOnClickListener(btnListener);
     }
 
+    // 處理Adapter
     private void processAdapter() {
         loadImagePaths();
         adapter = new SimpleAdapter(this, imagePaths, R.layout.pic_download_item, new String[]{"imagePath"}, new int[]{R.id.pic_download_item_imageview});
+//        adapter = new SimpleAdapter(this, imagePaths, R.layout.pic_download_item, new String[]{"imagePath"}, new int[]{R.id.pic_download_item_imageview}){
+//            @Override
+//            public View getView(int position, View convertView, ViewGroup parent) {
+//                if (convertView == null) {
+//                    convertView = super.getView(position, convertView, parent);
+//                }
+//                ImageView imageView = (ImageView) convertView.findViewById(R.id.pic_download_item_imageview);
+//                Log.d("rd26", "width:" + imageView.getWidth() + "/height:" + imageView.getHeight());
+//                Bitmap bitmap = null;
+//                try {
+//                    bitmap = BitmapFactory.decodeStream(new FileInputStream(new File(imagePaths.get(position).get("imagePath").toString())));
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                }
+//                imageView.setImageBitmap(bitmap);
+//                bitmap.recycle();
+//                return convertView;
+//            }
+//        };
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                new AlertDialog.Builder(PicDownloadActivity.this)
-                        .setView(R.layout.pic_download_item)
-                        .show();
+                String path = imagePaths.get(i).get("imagePath").toString();
+                Intent intent = new Intent(PicDownloadActivity.this, ShowPicItemActivity.class);
+                intent.putExtra("path", path);
+                startActivity(intent);
             }
         });
         gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -168,6 +179,7 @@ public class PicDownloadActivity extends AppCompatActivity {
         });
     }
 
+    // 取得圖片
     private void loadImagePaths() {
         if (imagePaths.size() > 0) imagePaths.clear();
         for (File imageFile : imageFiles.listFiles()) {
@@ -185,7 +197,11 @@ public class PicDownloadActivity extends AppCompatActivity {
         new DownLoadImageAsyncTask().execute(url);
     }
 
+    // 自訂義下載AsyncTask
     class DownLoadImageAsyncTask extends AsyncTask<String, Integer, Void> {
+
+        int dataSize = -1;
+        private final int CONTENT_NOT_KNOW = -1;
 
         @Override
         protected void onPreExecute() {
@@ -196,23 +212,24 @@ public class PicDownloadActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(String... strings) {
             try {
-                Log.d("rd26", "before:" + imagePaths.size());
                 URL url = new URL(strings[0]);
                 URLConnection urlConnection = url.openConnection();
-//                Log.d("rd26", "" + urlConnection.getContentLength());
-                publishProgress(PROGRESS_MAX, urlConnection.getContentLength());
-                BufferedInputStream bufferedInputStream = new BufferedInputStream(urlConnection.getInputStream());
-                Calendar calendar = Calendar.getInstance();
-                BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(new File(imageFiles.getPath() + "/" + calendar.getTimeInMillis() + transferImageType(urlConnection.getContentType()))));
-                int len =-1;
-                byte[] bytes = new byte[1024];
-                while((len=bufferedInputStream.read(bytes))!=-1) {
-                    bufferedOutputStream.write(bytes, 0, len);
-                    bufferedOutputStream.flush(); //實時更新下載進度（使用標記區別最大值）
-                    publishProgress(UPDATE, len);
+                dataSize = urlConnection.getContentLength();
+                if (dataSize != CONTENT_NOT_KNOW) {
+                    publishProgress(PROGRESS_MAX, dataSize);
+                    BufferedInputStream bufferedInputStream = new BufferedInputStream(urlConnection.getInputStream());
+                    Calendar calendar = Calendar.getInstance();
+                    BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(new File(imageFiles.getPath() + "/" + calendar.getTimeInMillis() + "." + transferImageType(urlConnection.getContentType()))));
+                    int len =-1;
+                    byte[] bytes = new byte[1024];
+                    while((len=bufferedInputStream.read(bytes))!=-1) {
+                        bufferedOutputStream.write(bytes, 0, len);
+                        bufferedOutputStream.flush(); //實時更新下載進度（使用標記區別最大值）
+                        publishProgress(UPDATE, len);
+                    }
+                    bufferedInputStream.close();
+                    bufferedOutputStream.close();
                 }
-                bufferedInputStream.close();
-                bufferedOutputStream.close();
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -230,7 +247,6 @@ public class PicDownloadActivity extends AppCompatActivity {
                     break;
                 case UPDATE:
                     progressBar.incrementProgressBy(values[1]);
-//                    Log.d("rd26", "increase:" + values[1]);
                     break;
             }
         }
@@ -240,16 +256,22 @@ public class PicDownloadActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
             topLinearLayout.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.GONE);
-            loadImagePaths();
-            Log.d("rd26", "after:" + imagePaths.size());
-            adapter.notifyDataSetChanged();
+            if (dataSize != CONTENT_NOT_KNOW) {
+                loadImagePaths();
+                adapter.notifyDataSetChanged();
+            }
         }
     }
 
+    // 自定義對應副檔名
     public String transferImageType(String type) {
         switch (type) {
             case "image/jpeg":
                 return "jpg";
+            case "image/png":
+                return "png";
+            case "image/gif":
+                return "gif";
             default:
                 return "";
         }
